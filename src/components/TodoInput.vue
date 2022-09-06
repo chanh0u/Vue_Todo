@@ -7,6 +7,8 @@
             <i class="addBtn fa fa-plus" aria-hidden="true"></i>
         </span>
         <!-- <button v-on:click="addTodo">추가</button> -->
+        <!-- <button id="Modal" @click="showModal = true">Show Modal</button> -->
+
 
         <modal v-if="showModal" @close="showModal = false">
             <h3 slot="header">경고</h3>
@@ -15,7 +17,11 @@
                 <i class="closeModalBtn fa fa-times" aria-hidden="true"></i>
             </span>
         </modal>
+        
 
+        <!-- <modal :show="showModal" @close="showModal = false"> -->
+
+        <!-- </modal>  -->
     </div>
 
 </template>
@@ -28,7 +34,7 @@ export default {
     data() {
         return {
             newTodoItem:"", // input박스 값 설정
-            showModal: true,
+            showModal: false,
         }
     },
     methods: {
@@ -41,7 +47,9 @@ export default {
                 this.$emit('addTodo',value);
                 this.clearInput();
             } else {
-                this.showModal = !this.showModal;
+                // this.showModal = !this.showModal; // true 로 바꿔서 모달창을 띄운다.
+                this.showModal = !this.showModal
+                console.log(this.showModal)
             }
         },
         clearInput() {
@@ -49,7 +57,7 @@ export default {
         }
     },
     components: {
-        Modal : Modal
+        Modal: Modal
     }
 }
 </script>
