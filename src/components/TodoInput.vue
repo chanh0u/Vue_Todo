@@ -5,18 +5,30 @@
         <span class="addContainer" v-on:click="addTodo">
             
             <i class="addBtn fa fa-plus" aria-hidden="true"></i>
-            <!-- <button>버튼</button> -->
         </span>
         <!-- <button v-on:click="addTodo">추가</button> -->
+
+        <modal v-if="showModal" @close="showModal = false">
+            <h3 slot="header">경고</h3>
+            <span slot="footer" @click="showModal = false">
+                할 일을 입력하세요.
+                <i class="closeModalBtn fa fa-times" aria-hidden="true"></i>
+            </span>
+        </modal>
+
     </div>
 
 </template>
 
 <script>
+import Modal from './common/Modal.vue'
+
 export default {
+    props: ['propsdata'],
     data() {
         return {
             newTodoItem:"", // input박스 값 설정
+            showModal: true,
         }
     },
     methods: {
@@ -28,11 +40,16 @@ export default {
                 // localStorage.setItem(value,value); // 로컬 스토리지를 통한 데이터 저장 방법 => 데이터 갱신 문제 발생!!
                 this.$emit('addTodo',value);
                 this.clearInput();
+            } else {
+                this.showModal = !this.showModal;
             }
         },
         clearInput() {
             this.newTodoItem='';
         }
+    },
+    components: {
+        Modal : Modal
     }
 }
 </script>

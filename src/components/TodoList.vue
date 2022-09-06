@@ -1,7 +1,8 @@
 <template>
   <!-- <div>list</div> -->
   <section>
-    <ul>
+    <!-- <ul> -->
+    <transition-group name="list" tag="ul"> <!-- 뷰 애니메이션 기능 -->
     <!-- 하나씩 하드코딩하는것은 비효율적이기 때문에 로컬스토리지를 이용하여 효율적으로 관리한다. -->
       <!-- <li>할일 1</li>
       <li>할일 2</li>
@@ -16,7 +17,8 @@
         <i class="fa fa-trash-o" aria-hidden="true"></i>
         </span>
       </li>
-    </ul>
+    </transition-group>
+    <!-- </ul> -->
   </section>
 </template>
 
@@ -53,6 +55,20 @@ export default {
 </script>
 
 <style>
+  .list-item {
+    display: inline-block;
+    margin-right: 10px;
+  }
+  .list-move {
+    transition: transform 1s;
+  }
+  .list-enter-active, .list-leave-active {
+    transition: all 1s;
+  }
+  .list-enter, .list-leave-to {
+    opacity: 0;
+    transform: translateY(30px);
+  }
   ul {
     /* 목록 아이템의 스타일을 지정 */
     list-style-type: none; 
